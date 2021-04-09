@@ -98,7 +98,31 @@ def GenerateWordCloud():
     plt.imshow(wordcloud);
     wordcloud.to_file("WordCloud.png")
 
+def GetURLsFromDomain(domain_http):
+    # Open The Output Excel
+    if os.path.exists("URL_List.xlsx"):
+        os.remove("URL_List.xlsx")
+    
+    wb = Workbook()
+    wb.save(filename = 'URL_List.xlsx')
+    workbook = load_workbook(filename="URL_List.xlsx")
+    sheet = workbook.active
+    
+     
+    url = domain_http
+    reqs = requests.get(url)
+    soup = BeautifulSoup(reqs.text, 'html.parser')
+     
+    for link in soup.find_all('a'):
+        TempList = link.get('href')
+        rows = sheet.max_row
+        sheet.cell(row=rows+1, column=1).value = TempList
+        
+        
+    workbook.save("URL_List.xlsx")
+    workbook.close()
 
-getSiteList("SitesList.xlsx")
-#getH1H2Data()
+#GetURLsFromDomain("https://www.puc-campinas.edu.br/")
+getSiteList("FoodIngredients.xlsx")
+getH1H2Data()
 GenerateWordCloud()
