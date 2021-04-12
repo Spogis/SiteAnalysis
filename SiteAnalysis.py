@@ -17,15 +17,40 @@ from wordcloud import WordCloud, STOPWORDS
 global MinChar
 MinChar = 2
 
+def GetURLsFromDomain(domain_http):
+    # Open The Output Excel
+    if os.path.exists("./SiteLists/URL_List.xlsx"):
+        os.remove("./SiteLists/URL_List.xlsx")
+    
+    wb = Workbook()
+    wb.save(filename = './SiteLists/URL_List.xlsx')
+    workbook = load_workbook(filename="./SiteLists/URL_List.xlsx")
+    sheet = workbook.active
+    
+     
+    url = domain_http
+    reqs = requests.get(url)
+    soup = BeautifulSoup(reqs.text, 'html.parser')
+     
+    for link in soup.find_all('a'):
+        TempList = link.get('href')
+        rows = sheet.max_row
+        sheet.cell(row=rows+1, column=1).value = TempList
+        
+        
+    workbook.save("./SiteLists/URL_List.xlsx")
+    workbook.close()
+    
 def getSiteList(open_file):
     global SitesURLs
-    #workbook = load_workbook(filename="SitesList.xlsx")
+    open_file="./SiteLists/"+open_file
     workbook = load_workbook(open_file)
     sheet = workbook.active
     SitesURLs =[]
 
     for cell in sheet['A']:
-        SitesURLs.append(cell.value)
+        if cell.value is not None:
+            SitesURLs.append(cell.value)
             
     workbook.close()
 
@@ -60,7 +85,7 @@ def GenerateWordCloud():
     
     # lista de stopword
     STOPWORDS_DATA = []
-    workbook = load_workbook(filename="STOPWORDS.xlsx")
+    workbook = load_workbook(filename="./Others/STOPWORDS.xlsx")
     sheet = workbook.active
     for cell in sheet['A']:
         print(cell.value)
@@ -96,33 +121,12 @@ def GenerateWordCloud():
     ax.set_axis_off()
      
     plt.imshow(wordcloud);
-    wordcloud.to_file("WordCloud.png")
-
-def GetURLsFromDomain(domain_http):
-    # Open The Output Excel
-    if os.path.exists("URL_List.xlsx"):
-        os.remove("URL_List.xlsx")
     
-    wb = Workbook()
-    wb.save(filename = 'URL_List.xlsx')
-    workbook = load_workbook(filename="URL_List.xlsx")
-    sheet = workbook.active
-    
-     
-    url = domain_http
-    reqs = requests.get(url)
-    soup = BeautifulSoup(reqs.text, 'html.parser')
-     
-    for link in soup.find_all('a'):
-        TempList = link.get('href')
-        rows = sheet.max_row
-        sheet.cell(row=rows+1, column=1).value = TempList
-        
-        
-    workbook.save("URL_List.xlsx")
-    workbook.close()
+    # Determine incremented filename
+    filename = "./Pictures/WordCloud.png"
+    wordcloud.to_file(filename)
 
-#GetURLsFromDomain("https://www.puc-campinas.edu.br/")
+#GetURLsFromDomain("https://www.ingredion.com/sa/pt-br.html")
 getSiteList("FoodIngredients.xlsx")
 getH1H2Data()
 GenerateWordCloud()
