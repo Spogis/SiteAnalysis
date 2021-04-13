@@ -123,10 +123,19 @@ def GenerateWordCloud():
     plt.imshow(wordcloud);
     
     # Determine incremented filename
-    filename = "./Pictures/WordCloud.png"
+    a= getNextFilePath("./Pictures")
+    filename = "./Pictures/WordCloud_" +str(a) + ".png"
     wordcloud.to_file(filename)
 
+def getNextFilePath(output_folder):
+    highest_num = 0
+    for f in os.listdir(output_folder):
+        highest_num = highest_num + 1
+
+    output_file = str(highest_num+1)
+    return output_file
+
 #GetURLsFromDomain("https://www.ingredion.com/sa/pt-br.html")
-getSiteList("FoodIngredients.xlsx")
-getH1H2Data()
+#getSiteList("FoodIngredients.xlsx")
+#getH1H2Data()
 GenerateWordCloud()
