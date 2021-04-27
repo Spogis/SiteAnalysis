@@ -1,5 +1,5 @@
 Passo 1: Baixar SiteAnalysis GitHub (Code/Download Zip)
-Link para GitHub: https://github.com/Spogis/SiteAnalysis?
+Link para GitHub: https://github.com/Spogis/SiteAnalysis
 Extrair o arquivo Zip em um pasta/local de sua preferência
 
 Passo 2: Baixar e Instalar o Anaconda
