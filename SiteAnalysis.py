@@ -136,9 +136,9 @@ def getNextFilePath(output_folder):
     return output_file
 
 #GetURLsFromDomain("https://dolly.com.br/")
-#getSiteList("./NewsLinks/NewsLinks.xlsx")
 
-getSiteList("CocaCola.xlsx")
+getSiteList("NewsLinks.xlsx")
+#getSiteList("CocaCola.xlsx")
 getH1H2Data()
 GenerateWordCloud()
 

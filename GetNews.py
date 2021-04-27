@@ -15,7 +15,7 @@ global links
 googlenews = GoogleNews()
 
 # Setup the research
-keywords="Campinas"
+keywords="Bolsonaro"
 period='360d'
 
 googlenews.clear()
@@ -30,19 +30,19 @@ links = googlenews.get_links()
 
 def getNewsLinks():
     # Open The Output Excel
-    if os.path.exists("./NewsLinks/NewsLinks.xlsx"):
-        os.remove("./NewsLinks/NewsLinks.xlsx")
+    if os.path.exists("./SiteLists/NewsLinks.xlsx"):
+        os.remove("./SiteLists/NewsLinks.xlsx")
 
     wb = Workbook()
-    wb.save(filename = './NewsLinks/NewsLinks.xlsx')
-    workbook = load_workbook(filename="./NewsLinks/NewsLinks.xlsx")
+    wb.save(filename = './SiteLists/NewsLinks.xlsx')
+    workbook = load_workbook(filename="./SiteLists/NewsLinks.xlsx")
     sheet = workbook.active
 
     for url in links:
         rows = sheet.max_row
         sheet.cell(row=rows+1, column=1).value = url
     
-    workbook.save("./NewsLinks/NewsLinks.xlsx")
+    workbook.save("./SiteLists/NewsLinks.xlsx")
     workbook.close()
 
 getNewsLinks()
