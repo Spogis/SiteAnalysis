@@ -111,7 +111,7 @@ def GenerateWordCloud():
     # gerar uma wordcloud
     wordcloud = WordCloud(stopwords=stopwords,
                           background_color="white",
-                          width=1000, height=1000, max_words=300,
+                          width=1000, height=1000, max_words=200,
                           max_font_size=200,
                           min_font_size=1).generate(all_summary)
      
@@ -135,7 +135,10 @@ def getNextFilePath(output_folder):
     output_file = str(highest_num+1)
     return output_file
 
-#GetURLsFromDomain("https://www.ingredion.com/sa/pt-br.html")
-#getSiteList("FoodIngredients.xlsx")
-#getH1H2Data()
+#GetURLsFromDomain("https://dolly.com.br/")
+#getSiteList("./NewsLinks/NewsLinks.xlsx")
+
+getSiteList("CocaCola.xlsx")
+getH1H2Data()
 GenerateWordCloud()
+

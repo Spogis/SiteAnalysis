@@ -15,8 +15,8 @@ global links
 googlenews = GoogleNews()
 
 # Setup the research
-keywords="software juridico"
-period='60d'
+keywords="Campinas"
+period='360d'
 
 googlenews.clear()
 googlenews.set_lang('pt')
