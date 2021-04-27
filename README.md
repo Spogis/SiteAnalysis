@@ -4,6 +4,7 @@ Link para GitHub: https://github.com/Spogis/SiteAnalysis
 Extrair o arquivo Zip em um pasta/local de sua preferência
 
 Passo 2: Baixar e Instalar o Anaconda
+
 Link para Baixar o Anaconda: https://www.anaconda.com/products/individual
 
 Passo 3: Instalar o pacote pip  através do CMD Prompt do Anaconda
