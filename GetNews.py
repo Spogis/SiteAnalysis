@@ -15,8 +15,8 @@ global links
 googlenews = GoogleNews()
 
 # Setup the research
-keywords="Bolsonaro"
-period='360d'
+keywords="Mega Sena"
+period='30d'
 
 googlenews.clear()
 googlenews.set_lang('pt')
